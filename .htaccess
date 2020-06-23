@@ -1,0 +1,34 @@
+#DirectoryIndex /
+
+#display errors
+php_value display_errors 1
+php_value display_startup_errors 1
+php_value error_reporting E_ALL
+
+#Максимальное потребление памяти одним скриптом
+php_value memory_limit 64M
+
+##Максимально допустимый размер данных отправляемых методом POST
+php_value post_max_size 5M
+
+##Разрешение на загрузку файлов
+php_value file_uploads On
+
+##Папка для хранения файлов во время загрузки
+php_value upload_tmp_dir /data/temp
+
+##Максимальный размер загружаемого файла
+php_value upload_max_filesize 5M
+
+##Максимально разрешённое количество одновременно загружаемых файлов
+php_value max_file_uploads 5
+
+
+#php hide
+RewriteEngine on
+RewriteBase /
+RewriteRule ^(.*)\.msl$ $1.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule /route/. /route/index.php [PT,L]
